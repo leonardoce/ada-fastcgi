@@ -48,4 +48,9 @@ package body Fastcgi is
 	 raise Fastcgi_Error;
       end if;
    end;
+   
+   procedure Finish_Request(Request:in out Request_Type) is
+   begin
+      Fcgiapp_H.FCGX_Finish_R(Request'Address);
+   end;
 end;

@@ -64,7 +64,7 @@ package fcgiapp_h is
    function FCGX_Accept_r (request : System.Address) return int;  -- c/fcgiapp.h:207
    pragma Import (C, FCGX_Accept_r, "FCGX_Accept_r");
 
-   procedure FCGX_Finish_r (request : access FCGX_Request);  -- c/fcgiapp.h:228
+   procedure FCGX_Finish_r (request : System.Address);  -- c/fcgiapp.h:228
    pragma Import (C, FCGX_Finish_r, "FCGX_Finish_r");
 
    procedure FCGX_Free (request : access FCGX_Request; close : int);  -- c/fcgiapp.h:240
