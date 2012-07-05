@@ -1,0 +1,5 @@
+fcgi_config.h
+*.o
+*~
+*.ali
+c/*.a
