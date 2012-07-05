@@ -56,12 +56,12 @@ package fcgiapp_h is
    pragma Import (C, FCGX_OpenSocket, "FCGX_OpenSocket");
 
    function FCGX_InitRequest
-     (request : access FCGX_Request;
+     (request : System.Address;
       sock : int;
       flags : int) return int;  -- c/fcgiapp.h:175
    pragma Import (C, FCGX_InitRequest, "FCGX_InitRequest");
 
-   function FCGX_Accept_r (request : access FCGX_Request) return int;  -- c/fcgiapp.h:207
+   function FCGX_Accept_r (request : System.Address) return int;  -- c/fcgiapp.h:207
    pragma Import (C, FCGX_Accept_r, "FCGX_Accept_r");
 
    procedure FCGX_Finish_r (request : access FCGX_Request);  -- c/fcgiapp.h:228

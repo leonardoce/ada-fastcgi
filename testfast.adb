@@ -1,10 +1,14 @@
 with Fcgiapp_H;
-with Interfaces.C;
+with Fastcgi;
 
 procedure Testfast is
-   use Fcgiapp_H;
+   Socket:Fastcgi.Socket_Handle;
+   Request:Fastcgi.Request_Type;
    
-   R:Interfaces.C.Int;
 begin
-   R:=FCGX_Init;
+   Fastcgi.Init;
+   Socket := Fastcgi.Open_Socket(":5000", 0);
+   Fastcgi.Init_Request(Request, Socket);
+   
+   Fastcgi.Accept_Request(Request);
 end;
