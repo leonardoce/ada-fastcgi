@@ -53,4 +53,21 @@ package body Fastcgi is
    begin
       Fcgiapp_H.FCGX_Finish_R(Request'Address);
    end;
+   
+   function Get_In_Channel(Request:in Request_Type) return Stream_Handle is
+   begin
+      return Stream_Handle(Request.C_In);
+   end;
+   
+   function Get_Out_Channel(Request:in Request_Type) return Stream_Handle is
+   begin
+      return Stream_Handle(Request.C_Out);
+   end;
+   
+   function Get_Err_Channel(Request:in Request_Type) return Stream_Handle is
+   begin
+      return Stream_Handle(Request.Err);
+   end;
+   
+   
 end;
