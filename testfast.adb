@@ -17,7 +17,13 @@ begin
       begin
 	 Fastcgi.Put("Content-type: text/html" & Ascii.Cr & Ascii.Lf, Out_Chan);
 	 Fastcgi.Put(Ascii.Cr & Ascii.Lf, Out_Chan);
-	 Fastcgi.Put("<html><body>ciao</body></html>", Out_Chan);
+	 Fastcgi.Put("<html><body>ciao", Out_Chan);
+	 
+	 for I in 1..1000 loop
+	    Fastcgi.Put("prova<br>", Out_Chan);
+	 end loop;
+	 
+	 Fastcgi.Put("</body></html>", Out_Chan);
       end;
    end loop;
 end;
