@@ -69,5 +69,35 @@ package body Fastcgi is
       return Stream_Handle(Request.Err);
    end;
    
+   procedure Put(Str:String; Channel:Stream_Handle) is
+      use Interfaces.C.Strings;
+      use Interfaces.C;
+      
+      C_Str : Chars_Ptr;
+      Val:Interfaces.C.Int;
+   begin
+      C_Str := New_String(Str);
+      Val := Fcgiapp_H.FCGX_PutStr(C_Str, Str'Length, Fcgiapp_H.FCGX_Stream_Access(Channel));
+      Free(C_Str);
+      
+      if Val=(-1) then 
+	 raise Fastcgi_Error;
+      end if;
+   end;
    
+   procedure Get(Buffer:out String; Count:in out Natural; Channel:Stream_Handle) is
+      use Interfaces.C.Strings;
+      use Interfaces.C;
+      
+      Aux_Buffer : String(1..Count) := (others => ' ');
+      Val : Interfaces.C.Int;
+      C_Buffer : Chars_Ptr;
+   begin      
+      C_Buffer := New_String(Aux_Buffer);
+      Val := Fcgiapp_H.FCGX_GetStr(C_Buffer, Interfaces.C.Int(Count), 
+						      Fcgiapp_H.FCGX_Stream_Access(channel));
+      Count := Natural(Val);
+      Buffer(Buffer'first..Integer(Val)+1) := Value(C_Buffer,Size_T(Val))(1..Integer(Val)+1);
+      Free(C_Buffer);
+   end;
 end;

@@ -17,6 +17,8 @@ package Fastcgi is
    function Get_Out_Channel(Request:in Request_Type) return Stream_Handle;
    function Get_Err_Channel(Request:in Request_Type) return Stream_Handle;
    
+   procedure Put(Str:String; Channel:Stream_Handle);
+   procedure Get(Buffer:out String; Count:in out Natural; Channel:Stream_Handle);
    
 private
    type Socket_Handle is new Integer;
