@@ -1,0 +1,6 @@
+project TestGpr is
+    for Source_Dirs use ("ada");
+    for Main use ("testfast.adb");
+    for Object_Dir use "obj";
+
+end TestGpr;
