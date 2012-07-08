@@ -10,5 +10,14 @@ begin
    Socket := Fastcgi.Open_Socket(":5000", 0);
    Fastcgi.Init_Request(Request, Socket);
    
-   Fastcgi.Accept_Request(Request);
+   while True loop
+      Fastcgi.Accept_Request(Request);
+      declare
+	 Out_Chan : Fastcgi.Stream_Handle := Fastcgi.Get_Out_Channel(Request);
+      begin
+	 Fastcgi.Put("Content-type: text/html" & Ascii.Cr & Ascii.Lf, Out_Chan);
+	 Fastcgi.Put(Ascii.Cr & Ascii.Lf, Out_Chan);
+	 Fastcgi.Put("<html><body>ciao</body></html>", Out_Chan);
+      end;
+   end loop;
 end;
