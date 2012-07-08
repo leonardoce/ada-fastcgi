@@ -3,4 +3,7 @@ project TestGpr is
     for Main use ("testfast.adb");
     for Object_Dir use "obj";
 
+    package Linker is
+        for Linker_Options use ("-Lc", "-lfastcgi");
+    end Linker;
 end TestGpr;
