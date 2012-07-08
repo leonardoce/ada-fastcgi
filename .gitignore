@@ -3,3 +3,4 @@ fcgi_config.h
 *~
 *.ali
 c/*.a
+obj/*
